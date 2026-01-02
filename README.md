@@ -18,11 +18,12 @@ anomaly-detection-system/
 ├── .env                    # Environment variables (create from .env.example)
 ├── src/
 │   └── video_surveillance_system/
-│       ├── config.py               # All configuration constants
-│       ├── anomaly_models.py       # YOLO + VideoMAE wrapper
-│       ├── gemini_service.py       # Gemini video analysis
-│       ├── vector_db.py            # Qdrant operations
-│       └── app.py                  # Main Flask application
+│          └── perception_models/
+│                 ├── config.py               # All configuration constants
+│                 ├── anomaly_models.py       # YOLO + VideoMAE wrapper
+│                 ├── gemini_service.py       # Gemini video analysis
+│                 ├── vector_db.py            # Qdrant operations
+│                 └── app.py                  # Main Flask application
 ├── uploads/                # Uploaded videos
 ├── clips/                  # Extracted anomaly clips
 ├── temp/                   # Temporary processing files
@@ -71,7 +72,7 @@ Required API keys:
 ### 5. Run the application
 
 ```bash
-uv run src/video_surveillance_system/app.py
+uv run src/video_surveillance_system/perception_models/app.py
 ```
 
 The server will start on `http://0.0.0.0:5001`
@@ -163,3 +164,11 @@ Edit `config.py` to adjust:
 - Clips are saved as H.264 MP4 files
 - Vector DB persists across sessions
 - SMS alerts have 60-second cooldown by default
+
+## Kaggle Notebook code:
+
+- Need to be run on kaggle with accelerator t4x2 gpu
+- The url the cell outputs needs to be pasted into anomaly_models.py
+- place the src/video_surveillance_system/perception_models/pe_surveillance_head.pth file in kaggle notebook 
+- head_path = '/kaggle/working/pe_surveillance_head.pth'
+
